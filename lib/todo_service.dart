@@ -2,10 +2,12 @@ import 'dart:math';
 
 import 'package:bloc_rx_app/todo.dart';
 
-class TodoService {
-  Stream<List<Todo>> todos() async* {
-    await Future.delayed(Duration(seconds: 2));
+abstract class TodoService {
+  Stream<List<Todo>> todos();
+}
 
+class TodoServiceImpl extends TodoService {
+  Stream<List<Todo>> todos() async* {
     final todos = <Todo>[];
     for (int i = 1; i <= 50; i++) {
       final todo = Todo(

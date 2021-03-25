@@ -22,7 +22,9 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       yield* _service
           .todos()
           .map<TodoState>((todos) => TodoState.success(todos))
-          .onErrorReturnWith((err) => TodoState.error(err.message))
+          .onErrorReturnWith((err) => state.status == TodoStatus.success
+              ? state // we emit last success state when we receive error from network
+              : TodoState.error(err.message))
           .startWith(TodoState.loading());
     }
   }

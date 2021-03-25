@@ -28,7 +28,7 @@ class TodosPage extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create: (context) =>
-            TodoBloc(service: TodoService())..add(GetTodosEvent()),
+            TodoBloc(service: TodoServiceImpl())..add(GetTodosEvent()),
         child: BlocBuilder<TodoBloc, TodoState>(
           builder: (context, state) {
             switch (state.status) {
